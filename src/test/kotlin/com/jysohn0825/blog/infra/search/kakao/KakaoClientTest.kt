@@ -76,7 +76,7 @@ class KakaoClientTest {
     }
 
     private fun getDocuments(title: String, year: Int) = KakaoSearchByKeywordResponse.Documents(
-        title, "내용", "URL", "이름", "thumbnail", LocalDateTime.of(year, 1, 1, 1, 1)
+        title, LocalDateTime.of(year, 1, 1, 1, 1)
     )
 
     companion object {

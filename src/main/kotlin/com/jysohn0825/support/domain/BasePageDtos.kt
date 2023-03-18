@@ -4,14 +4,13 @@ enum class SortEnum {
     ACCURACY, RECENCY
 }
 
-open class BasePageRequest(
-    open val sort: SortEnum = SortEnum.ACCURACY,
-    open val page: Int = 1,
-    open val size: Int = 10
+data class BasePageRequest(
+    val sort: SortEnum = SortEnum.ACCURACY,
+    val page: Int = 1,
+    val size: Int = 10
 )
 
 data class BasePageResponse(
-    val total: Int,
     val page: Int,
     val isEnd: Boolean
 )
