@@ -1,7 +1,6 @@
 package com.jysohn0825.blog.infra.search.kakao
 
 import com.jysohn0825.support.domain.BasePageRequest
-import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.http.HttpHeaders
 import org.springframework.http.MediaType
 import org.springframework.http.RequestEntity
@@ -13,9 +12,8 @@ import org.springframework.web.util.UriComponentsBuilder
 @Component
 class KakaoClient(
     private val properties: KakaoProperties,
-    restTemplateBuilder: RestTemplateBuilder
+    private val restTemplate: RestTemplate
 ) {
-    private val restTemplate: RestTemplate = restTemplateBuilder.build()
 
     fun searchByKeyword(keyword: String, request: BasePageRequest): KakaoSearchByKeywordResponseList {
 
@@ -42,8 +40,7 @@ class KakaoClient(
                     is Unauthorized -> throw RuntimeException("잘못된 API Key")
                     else -> throw RuntimeException("알 수 없는 에러", it)
                 }
-            }
-            .map { it.body }
-            .getOrElse { KakaoSearchByKeywordResponseList() }
+            }.getOrNull()
+            .let { it?.body ?: KakaoSearchByKeywordResponseList() }
     }
 }
