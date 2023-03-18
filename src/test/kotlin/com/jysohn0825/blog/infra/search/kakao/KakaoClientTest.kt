@@ -23,7 +23,7 @@ class KakaoClientTest {
     @Test
     fun `API Key 오류 확인`() {
         every {
-            restTemplate.exchange(any(), KakaoSearchByKeywordResponseList::class.java)
+            restTemplate.exchange(any(), KakaoSearchByKeywordResponse::class.java)
         } throws HttpClientErrorException(HttpStatus.UNAUTHORIZED)
 
         assertThrows<RuntimeException> { client.searchByKeyword(KEYWORD, BasePageRequest(size = SIZE)) }
@@ -32,24 +32,24 @@ class KakaoClientTest {
     @Test
     fun `응답 중 body가 없을 경우 emptyList 확인`() {
         every {
-            restTemplate.exchange(any(), KakaoSearchByKeywordResponseList::class.java)
+            restTemplate.exchange(any(), KakaoSearchByKeywordResponse::class.java)
         } returns ResponseEntity.of(Optional.ofNullable(null))
 
         val actual = client.searchByKeyword(KEYWORD, BasePageRequest(size = SIZE))
 
-        assertThat(actual.kakaoSearchResponse.size).isEqualTo(0)
+        assertThat(actual.documents).isEmpty()
     }
 
     @Test
     fun `정렬에 따른 정상 응답 확인`() {
         getMappedRequestAndResponseList(SIZE).forEach { (sort, size) ->
             every {
-                restTemplate.exchange(any(), KakaoSearchByKeywordResponseList::class.java)
+                restTemplate.exchange(any(), KakaoSearchByKeywordResponse::class.java)
             } returns ResponseEntity.of(Optional.of(getResponse(size, sort)))
 
             val actual = client.searchByKeyword(KEYWORD, BasePageRequest(sort, 0, size))
 
-            assertThat(actual.kakaoSearchResponse[0].documents.title).isEqualTo("정확도순 ${size}위")
+            assertThat(actual.documents[0].title).isEqualTo("정확도순 ${size}위")
         }
     }
 
@@ -62,16 +62,16 @@ class KakaoClientTest {
         size: Int,
         sortEnum: SortEnum = SortEnum.ACCURACY,
         isEnd: Boolean = false
-    ): KakaoSearchByKeywordResponseList {
+    ): KakaoSearchByKeywordResponse {
         val meta = KakaoSearchByKeywordResponse.Meta(1000, 1000, isEnd)
-        val list = buildList {
+        val documents = buildList {
             for (i in 0..size) {
-                add(KakaoSearchByKeywordResponse(meta, getDocuments(title = "정확도순 ${i}위", year = i)))
+                add(getDocuments(title = "정확도순 ${i}위", year = i))
             }
         }
         return when (sortEnum) {
-            SortEnum.ACCURACY -> KakaoSearchByKeywordResponseList(list.sortedBy { it.documents.title })
-            SortEnum.RECENCY -> KakaoSearchByKeywordResponseList(list.sortedByDescending { it.documents.datetime })
+            SortEnum.ACCURACY -> KakaoSearchByKeywordResponse(meta, documents.sortedBy { it.title })
+            SortEnum.RECENCY -> KakaoSearchByKeywordResponse(meta, documents.sortedByDescending { it.datetime })
         }
     }
 

@@ -3,18 +3,14 @@ package com.jysohn0825.blog.infra.search.kakao
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDateTime
 
-data class KakaoSearchByKeywordResponseList(
-    val kakaoSearchResponse: List<KakaoSearchByKeywordResponse> = emptyList()
-)
-
 data class KakaoSearchByKeywordResponse(
-    val meta: Meta,
-    val documents: Documents
+    val meta: Meta = Meta(),
+    val documents: List<Documents> = emptyList()
 ) {
     data class Meta(
-        val total_count: Int,
-        val pageable_count: Int,
-        val is_end: Boolean
+        val total_count: Int = 0,
+        val pageable_count: Int = 0,
+        val is_end: Boolean = true
     )
 
     data class Documents(
