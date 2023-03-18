@@ -1,4 +1,4 @@
-package com.jysohn0825.blog.infra.config
+package com.jysohn0825.blog.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
