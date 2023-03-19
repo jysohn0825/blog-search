@@ -6,6 +6,7 @@ import com.jysohn0825.support.domain.BasePageRequest
 import com.jysohn0825.support.domain.BasePageResponse
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDateTime
+import java.util.*
 
 data class KakaoSearchByKeywordResponse(
     val meta: Meta = Meta(),
@@ -20,8 +21,9 @@ data class KakaoSearchByKeywordResponse(
 
     data class Documents(
         val title: String = "",
-        @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-        val datetime: LocalDateTime = LocalDateTime.now(),
+//        @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+//        val datetime: LocalDateTime = LocalDateTime.now(),
+        val datetime: Date = Date(),
         val contents: String = "",
         val url: String = "",
         @JsonProperty("blogname") val blogName: String = "",
@@ -34,5 +36,5 @@ data class KakaoSearchByKeywordResponse(
     )
 
     private fun getPage(meta: Meta, request: BasePageRequest): Int =
-        if (meta.isEnd) meta.pageableCount / request.size + 1 else request.page
+        if (meta.isEnd) meta.pageableCount / request.size else request.page
 }

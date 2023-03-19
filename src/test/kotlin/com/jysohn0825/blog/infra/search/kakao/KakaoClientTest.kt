@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
 import java.time.LocalDateTime
-import java.util.Optional
+import java.util.*
 
 class KakaoClientTest {
 
@@ -76,7 +76,7 @@ class KakaoClientTest {
     }
 
     private fun getDocuments(title: String, year: Int) = KakaoSearchByKeywordResponse.Documents(
-        title, LocalDateTime.of(year, 1, 1, 1, 1)
+        title, Date(year, 1,1) //LocalDateTime.of(year, 1, 1, 1, 1)
     )
 
     companion object {
