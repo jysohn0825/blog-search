@@ -1,4 +1,4 @@
-package com.jysohn0825.blog.infra.search.kakao
+package com.jysohn0825.blog.infra.channel.kakao
 
 import com.jysohn0825.support.domain.BasePageRequest
 import com.jysohn0825.support.domain.SortEnum
@@ -11,14 +11,28 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
-import java.time.LocalDateTime
 import java.util.*
 
 class KakaoClientTest {
 
-    private val properties = KakaoProperties("uri", "path", "key")
+    private val properties = KakaoProperties("uri", "path", "key", 50, 50)
     private val restTemplate = mockk<RestTemplate>()
     private val client = KakaoClient(properties, restTemplate)
+
+
+    @Test
+    fun `페이지 유효성 체크`() {
+        assertThrows<IllegalArgumentException> {
+            client.checkPageRequestValid(BasePageRequest(page = properties.pageLimit + 1))
+        }
+    }
+
+    @Test
+    fun `사이즈 유효성 체크`() {
+        assertThrows<IllegalArgumentException> {
+            client.checkPageRequestValid(BasePageRequest(page = properties.sizeLimit + 1))
+        }
+    }
 
     @Test
     fun `API Key 오류 확인`() {
@@ -76,7 +90,7 @@ class KakaoClientTest {
     }
 
     private fun getDocuments(title: String, year: Int) = KakaoSearchByKeywordResponse.Documents(
-        title, Date(year, 1,1) //LocalDateTime.of(year, 1, 1, 1, 1)
+        title, Date(year, 1, 1) //LocalDateTime.of(year, 1, 1, 1, 1)
     )
 
     companion object {

@@ -1,5 +1,6 @@
-package com.jysohn0825.blog.infra.search.kakao
+package com.jysohn0825.blog.infra.channel.kakao
 
+import com.jysohn0825.blog.infra.channel.ChannelClient
 import com.jysohn0825.support.domain.BasePageRequest
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
@@ -14,9 +15,16 @@ import org.springframework.web.util.UriComponentsBuilder
 class KakaoClient(
     private val properties: KakaoProperties,
     private val restTemplate: RestTemplate
-) {
+) : ChannelClient {
 
-    fun searchByKeyword(keyword: String, request: BasePageRequest): KakaoSearchByKeywordResponse {
+    override fun checkPageRequestValid(request: BasePageRequest) {
+        require(request.page > properties.pageLimit) { "최대 페이지 수를 넘겼습니다." }
+        require(request.size > properties.sizeLimit) { "최대 문서 수를 넘겼습니다." }
+    }
+
+    override fun searchByKeyword(keyword: String, request: BasePageRequest): KakaoSearchByKeywordResponse {
+
+        checkPageRequestValid(request)
 
         val uri = UriComponentsBuilder
             .fromUriString(properties.uri)

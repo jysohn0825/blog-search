@@ -1,17 +1,17 @@
-package com.jysohn0825.blog.infra.search.kakao
+package com.jysohn0825.blog.infra.channel.kakao
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.jysohn0825.blog.application.ContentSummary
 import com.jysohn0825.blog.application.KeywordSearchResponse
+import com.jysohn0825.blog.infra.channel.ChannelSearchByKeywordResponse
 import com.jysohn0825.support.domain.BasePageRequest
 import com.jysohn0825.support.domain.BasePageResponse
-import org.springframework.format.annotation.DateTimeFormat
-import java.time.LocalDateTime
 import java.util.*
 
 data class KakaoSearchByKeywordResponse(
     val meta: Meta = Meta(),
     val documents: List<Documents> = emptyList()
-) {
+) : ChannelSearchByKeywordResponse() {
 
     data class Meta(
         @JsonProperty("total_count") val totalCount: Int = 0,
@@ -30,10 +30,11 @@ data class KakaoSearchByKeywordResponse(
         val thumbnail: String = ""
     )
 
-    fun changeKeywordSearchResponse(request: BasePageRequest): KeywordSearchResponse = KeywordSearchResponse(
-        meta.let { BasePageResponse(getPage(it, request), it.isEnd) },
-        documents.map { KeywordSearchResponse.ContentSummary(it.title, it.contents, it.url, it.thumbnail, it.datetime) }
-    )
+    override fun changeKeywordSearchResponse(request: BasePageRequest): KeywordSearchResponse =
+        KeywordSearchResponse(
+            meta.let { BasePageResponse(getPage(it, request), it.isEnd) },
+            documents.map { ContentSummary(it.title, it.contents, it.url, it.thumbnail, it.datetime) }
+        )
 
     private fun getPage(meta: Meta, request: BasePageRequest): Int =
         if (meta.isEnd) meta.pageableCount / request.size else request.page
