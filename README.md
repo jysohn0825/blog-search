@@ -32,5 +32,6 @@
 - 테스트코드를 통한 문서화
 
 
-### API 문서
-- 서버 실행 후 : localhost:8080/swagger-ui.html
+### 정보
+- JAR : /jar 하위에 저장
+- API 문서 : swagger.json 혹은 서버 실행 후 localhost:8080/swagger-ui.html
