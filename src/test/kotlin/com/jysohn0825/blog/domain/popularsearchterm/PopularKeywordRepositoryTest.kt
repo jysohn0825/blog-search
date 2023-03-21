@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.Executors
 import javax.persistence.EntityManager
 import javax.transaction.Transactional
 
@@ -18,8 +16,7 @@ import javax.transaction.Transactional
 @DataJpaTest
 class PopularKeywordRepositoryTest @Autowired constructor(
     private val repository: PopularKeywordRepository,
-    private val testEntityManager: TestEntityManager,
-    private val entityManager: EntityManager
+    private val testEntityManager: TestEntityManager
 ) {
 
     val service = PopularKeywordService(repository)

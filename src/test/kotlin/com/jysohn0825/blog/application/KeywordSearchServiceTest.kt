@@ -12,7 +12,7 @@ import io.mockk.just
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.Date
+import java.time.LocalDateTime
 
 class KeywordSearchServiceTest {
     private val channelClient = mockk<ChannelFactory>()
@@ -20,16 +20,16 @@ class KeywordSearchServiceTest {
     private val service = KeywordSearchService(channelClient, keywordCountEventService)
 
     private val list = listOf(
-        KakaoSearchByKeywordResponse.Documents("정확도9", Date(2000)), // LocalDateTime.of(2000, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도8", Date(2001)), // LocalDateTime.of(2001, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도7", Date(2002)), // LocalDateTime.of(2002, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도6", Date(2003)), // LocalDateTime.of(2003, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도5", Date(2004)), // LocalDateTime.of(2004, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도4", Date(2005)), // LocalDateTime.of(2005, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도3", Date(2006)), // LocalDateTime.of(2006, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도2", Date(2007)), // LocalDateTime.of(2007, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도1", Date(2008)), // LocalDateTime.of(2008, 1, 1, 1, 1)),
-        KakaoSearchByKeywordResponse.Documents("정확도0", Date(2009)), // LocalDateTime.of(2009, 1, 1, 1, 1))
+        KakaoSearchByKeywordResponse.Documents("정확도9", LocalDateTime.of(2000, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도8", LocalDateTime.of(2001, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도7", LocalDateTime.of(2002, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도6", LocalDateTime.of(2003, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도5", LocalDateTime.of(2004, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도4", LocalDateTime.of(2005, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도3", LocalDateTime.of(2006, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도2", LocalDateTime.of(2007, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도1", LocalDateTime.of(2008, 1, 1, 1, 1)),
+        KakaoSearchByKeywordResponse.Documents("정확도0", LocalDateTime.of(2009, 1, 1, 1, 1))
     )
 
     @Test

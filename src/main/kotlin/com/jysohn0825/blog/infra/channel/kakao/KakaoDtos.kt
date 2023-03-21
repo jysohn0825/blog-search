@@ -1,11 +1,13 @@
 package com.jysohn0825.blog.infra.channel.kakao
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.jysohn0825.blog.application.ContentSummary
 import com.jysohn0825.blog.application.KeywordSearchResponse
 import com.jysohn0825.blog.infra.channel.ChannelSearchByKeywordResponse
 import com.jysohn0825.support.domain.BasePageRequest
 import com.jysohn0825.support.domain.BasePageResponse
+import java.time.LocalDateTime
 import java.util.*
 
 data class KakaoSearchByKeywordResponse(
@@ -21,12 +23,11 @@ data class KakaoSearchByKeywordResponse(
 
     data class Documents(
         val title: String = "",
-//        @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-//        val datetime: LocalDateTime = LocalDateTime.now(),
-        val datetime: Date = Date(),
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX", timezone = "Asia/Seoul")
+        val datetime: LocalDateTime = LocalDateTime.now(),
         val contents: String = "",
         val url: String = "",
-        @JsonProperty("blogname") val blogName: String = "",
+        val blogName: String = "",
         val thumbnail: String = ""
     )
 

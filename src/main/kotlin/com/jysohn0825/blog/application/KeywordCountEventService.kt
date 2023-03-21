@@ -16,7 +16,7 @@ class KeywordCountEventService(
 
     @Async
     @EventListener
-    fun addCountListener(event: PopularKeywordEvent){
+    fun addCountListener(event: PopularKeywordEvent) {
         popularKeywordService.findAndSave(event.pk)
     }
 }

@@ -3,7 +3,7 @@ package com.jysohn0825.blog.application
 import com.jysohn0825.blog.application.ContentSummary.Companion.CONTENT_LIMIT_LENGTH
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.*
+import java.time.LocalDateTime
 
 class ContentSummaryTest {
 
@@ -31,7 +31,7 @@ class ContentSummaryTest {
             """.trimIndent(),
             "url",
             "thumbnail",
-            Date()
+            LocalDateTime.now()
         )
 
         assertThat(summary.contents.length).isEqualTo(CONTENT_LIMIT_LENGTH)
