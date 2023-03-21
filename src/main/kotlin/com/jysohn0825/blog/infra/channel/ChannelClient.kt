@@ -1,6 +1,5 @@
 package com.jysohn0825.blog.infra.channel
 
-import com.jysohn0825.blog.infra.channel.kakao.KakaoClient
 import com.jysohn0825.support.domain.BasePageRequest
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
@@ -17,9 +16,9 @@ interface ChannelClient<T : ChannelSearchByKeywordResponse> {
     fun checkPageRequestValid(request: BasePageRequest)
     fun searchByKeyword(keyword: String, request: BasePageRequest): ChannelSearchByKeywordResponse
 
-    fun uriForGetMethod(params: Map<String, Any>): URI = UriComponentsBuilder
-        .fromUriString(KakaoClient.URL)
-        .path(KakaoClient.PATH)
+    fun uriForGetMethod(url: String, path: String, params: Map<String, Any>): URI = UriComponentsBuilder
+        .fromUriString(url)
+        .path(path)
         .apply { params.forEach { queryParam(it.key, it.value) } }
         .encode()
         .build()

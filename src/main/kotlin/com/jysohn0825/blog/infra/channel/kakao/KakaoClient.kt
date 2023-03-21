@@ -33,14 +33,13 @@ class KakaoClient(
 
         checkPageRequestValid(request)
 
-        val uri = uriForGetMethod(
-            mapOf(
-                "query" to keyword,
-                "sort" to request.sort,
-                "page" to request.page,
-                "size" to request.size
-            )
+        val paramMap = mapOf(
+            "query" to keyword,
+            "sort" to request.sort,
+            "page" to request.page,
+            "size" to request.size
         )
+        val uri = uriForGetMethod(URL, PATH, paramMap)
         val requestEntity = requestEntityForGetMethod(uri, mapOf(HttpHeaders.AUTHORIZATION to key))
 
         return runCatching { restTemplate.exchange(requestEntity, KakaoSearchByKeywordResponse::class.java) }

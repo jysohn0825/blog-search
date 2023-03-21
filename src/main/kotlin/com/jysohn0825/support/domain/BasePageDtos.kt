@@ -12,5 +12,6 @@ data class BasePageRequest(
 
 data class BasePageResponse(
     val page: Int,
+    val size: Int,
     val isEnd: Boolean
 )

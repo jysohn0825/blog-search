@@ -1,6 +1,7 @@
 package com.jysohn0825.blog.application
 
 import com.jysohn0825.blog.application.ContentSummary.Companion.CONTENT_LIMIT_LENGTH
+import com.jysohn0825.blog.infra.channel.ChannelType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
@@ -30,8 +31,9 @@ class ContentSummaryTest {
             Donec at consequat turpis, a suscipit leo.
             """.trimIndent(),
             "url",
-            "thumbnail",
-            LocalDateTime.now()
+            LocalDateTime.now(),
+            ChannelType.KAKAO,
+            "thumbnail"
         )
 
         assertThat(summary.contents.length).isEqualTo(CONTENT_LIMIT_LENGTH)

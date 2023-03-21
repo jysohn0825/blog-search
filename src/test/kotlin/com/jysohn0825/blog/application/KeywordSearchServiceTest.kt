@@ -119,7 +119,7 @@ class KeywordSearchServiceTest {
                 SortEnum.RECENCY -> response.sortedByDescending { it.datetime }
             }
         }.let {
-            if (isEnd) it.slice(meta.pageableCount / size + 1 until meta.pageableCount / size + list.size - 1)
+            if (isEnd) it.slice(meta.pageableCount / size + 1 until meta.pageableCount / size + list.size - 2)
             else it.slice(page * size - size until page * size)
         }
         return KakaoSearchByKeywordResponse(meta, documents)
