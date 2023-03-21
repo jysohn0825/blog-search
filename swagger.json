@@ -1,0 +1,230 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Blog Search API Document",
+    "description": "This API Document is for Blog Search API Information"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/search": {
+      "get": {
+        "tags": [
+          "keyword-search-controller"
+        ],
+        "summary": "Blog search by keyword",
+        "description": "Blog search by using Open API of KAKAO, NAVER",
+        "operationId": "searchByKeyword",
+        "parameters": [
+          {
+            "name": "channel",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "KAKAO",
+                "NAVER"
+              ]
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageRequest",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/BasePageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/KeywordSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "There are two blank when use Kakao search \n DB error when storing popular keyword \n Request valid check \n ",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "type": "string",
+                  "example": "{{\"httpStatus\":\"BAD_REQUEST\",\"message\":\"Bad search keyword\"} \n {{\"httpStatus\":\"BAD_REQUEST\",\"message\":\"Cannot store popular keyword\"} \n {{\"httpStatus\":\"BAD_REQUEST\",\"message\":\"Wrong size (it must be in N ~ M)\"}"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Open API server error",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "type": "string",
+                  "example": "{{\"httpStatus\":\"BAD_REQUEST\",\"message\":\"Open API server error\"}"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/popular-keyword": {
+      "get": {
+        "tags": [
+          "popular-keyword-controller"
+        ],
+        "summary": "Search popular keyword",
+        "description": "Find popular keyword by YYMMDDHH(default is current hour)",
+        "operationId": "searchByKeyword_1",
+        "parameters": [
+          {
+            "name": "baseHour",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json;charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/PopularKeywordResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BasePageRequest": {
+        "type": "object",
+        "properties": {
+          "sort": {
+            "type": "string",
+            "enum": [
+              "ACCURACY",
+              "RECENCY"
+            ]
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "BasePageResponse": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "end": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ContentSummary": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "contents": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "dateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "thumbnail": {
+            "type": "string"
+          }
+        }
+      },
+      "KeywordSearchResponse": {
+        "type": "object",
+        "properties": {
+          "pageResponse": {
+            "$ref": "#/components/schemas/BasePageResponse"
+          },
+          "channel": {
+            "type": "string",
+            "enum": [
+              "KAKAO",
+              "NAVER"
+            ]
+          },
+          "contents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ContentSummary"
+            }
+          }
+        }
+      },
+      "PopularKeywordRank": {
+        "type": "object",
+        "properties": {
+          "rank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "keyword": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PopularKeywordResponse": {
+        "type": "object",
+        "properties": {
+          "popularKeywords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PopularKeywordRank"
+            }
+          }
+        }
+      }
+    }
+  }
+}
