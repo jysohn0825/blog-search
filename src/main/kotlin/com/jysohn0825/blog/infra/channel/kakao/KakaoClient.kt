@@ -20,7 +20,7 @@ class KakaoClient(
         return when (checkBlank.size) {
             2 -> checkBlank[1]
             1 -> checkBlank[0]
-            else -> throw IllegalArgumentException("잘못된 검색어 입니다.")
+            else -> throw IllegalArgumentException("Bad search keyword")
         }
     }
 

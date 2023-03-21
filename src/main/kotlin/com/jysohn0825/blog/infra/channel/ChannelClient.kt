@@ -1,6 +1,7 @@
 package com.jysohn0825.blog.infra.channel
 
 import com.jysohn0825.blog.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.errors.OpenApiException
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.http.RequestEntity
@@ -34,8 +35,8 @@ interface ChannelClient<T : ChannelSearchByKeywordResponse> {
 
     private fun checkAndThrowException(exception: Throwable) {
         when (exception) {
-            is HttpClientErrorException.Unauthorized -> throw RuntimeException("잘못된 API Key")
-            else -> throw RuntimeException("알 수 없는 에러", exception)
+            is HttpClientErrorException.Unauthorized -> throw OpenApiException("Wrong API Key", exception)
+            else -> throw OpenApiException("Open API server error", exception)
         }
     }
 

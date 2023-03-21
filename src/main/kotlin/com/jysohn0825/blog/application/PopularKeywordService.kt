@@ -28,7 +28,7 @@ class PopularKeywordService(
     }
 
     private fun checkRetryOrException(exception: Throwable, pk: PopularKeywordPk, isRepeat: Boolean) {
-        if (isRepeat) throw RuntimeException("인기 검색어 저장 에러")
+        if (isRepeat) throw RuntimeException("Cannot store popular keyword")
         when (exception) {
             is DataIntegrityViolationException -> findAndSave(pk, true)
             is EntityExistsException -> findAndSave(pk, true)

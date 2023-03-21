@@ -21,4 +21,10 @@ class GlobalExceptionHandler {
         return ResponseEntity<ErrorResponse?>(response, response.httpStatus)
     }
 
+    @ExceptionHandler(OpenApiException::class)
+    fun handleOpenApiException(ex: OpenApiException): ResponseEntity<ErrorResponse?> {
+        val response = ErrorResponse(HttpStatus.BAD_GATEWAY, ex.message)
+        return ResponseEntity<ErrorResponse?>(response, response.httpStatus)
+    }
+
 }

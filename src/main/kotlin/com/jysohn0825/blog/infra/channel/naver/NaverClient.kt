@@ -22,8 +22,8 @@ class NaverClient(
     override fun extractKeyword(keyword: String): String = keyword
 
     override fun checkPageRequestValid(request: BasePageRequest) {
-        require(request.page in PAGE_MIN_LIMIT..PAGE_MAX_LIMIT) { "올바르지 않은 페이지 (${KakaoClient.PAGE_MIN_LIMIT} ~ ${KakaoClient.PAGE_MAX_LIMIT} 가 아님)." }
-        require(request.size in SIZE_MIN_LIMIT..SIZE_MAX_LIMIT) { "올바르지 않은 사이즈 (${KakaoClient.SIZE_MIN_LIMIT} ~ ${KakaoClient.SIZE_MAX_LIMIT} 가 아님)." }
+        require(request.page in PAGE_MIN_LIMIT..PAGE_MAX_LIMIT) { "Wrong size (it must be in ${KakaoClient.PAGE_MIN_LIMIT} ~ ${KakaoClient.PAGE_MAX_LIMIT})" }
+        require(request.size in SIZE_MIN_LIMIT..SIZE_MAX_LIMIT) { "Wrong size (it must be in ${KakaoClient.SIZE_MIN_LIMIT} ~ ${KakaoClient.SIZE_MAX_LIMIT})" }
     }
 
     override fun searchByKeyword(keyword: String, request: BasePageRequest): NaverSearchByKeywordResponse {

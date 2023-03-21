@@ -29,3 +29,8 @@
 - 멀티 모듈 구성 의존 제약 사항
 - 로그 처리 (logback)
 - tomcat, hikari timeout 및 pool
+- 테스트코드를 통한 문서화
+
+
+### API 문서
+- 서버 실핼 후 : localhost:8080/swagger-ui.html
