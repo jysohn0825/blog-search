@@ -20,7 +20,6 @@ class KakaoClientTest {
     private val restTemplate = mockk<RestTemplate>()
     private val client = KakaoClient(restTemplate)
 
-
     @Test
     fun `페이지 유효성 체크`() {
         assertThrows<IllegalArgumentException> {

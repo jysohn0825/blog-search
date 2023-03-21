@@ -16,7 +16,7 @@ class ChannelFactory(
         }
     }
 
-    fun extractKeyword(channel: ChannelType, keyword: String): String{
+    fun extractKeyword(channel: ChannelType, keyword: String): String {
         return when (channel) {
             ChannelType.KAKAO -> kakaoClient.findKeyword(keyword)
             ChannelType.NAVER -> kakaoClient.findKeyword(keyword) // TODO NAVER API 로 변경

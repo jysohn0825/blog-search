@@ -115,4 +115,3 @@ class PopularKeywordRepositoryTest @Autowired constructor(
         assertThat(actual.count).isEqualTo(count + 1)
     }
 }
-

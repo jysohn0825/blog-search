@@ -6,14 +6,14 @@ import com.jysohn0825.support.utils.getStringYyMMddHH
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class PopularKeywordResponseTest{
+class PopularKeywordResponseTest {
 
     @Test
-    fun `DB 응답을 API 응답 치환 시 랭킹 확인`(){
+    fun `DB 응답을 API 응답 치환 시 랭킹 확인`() {
         val list = listOf(
-            PopularKeyword(PopularKeywordPk(getStringYyMMddHH(),"키워드1"), 3),
-            PopularKeyword(PopularKeywordPk(getStringYyMMddHH(),"키워드2"), 2),
-            PopularKeyword(PopularKeywordPk(getStringYyMMddHH(),"키워드3"), 1),
+            PopularKeyword(PopularKeywordPk(getStringYyMMddHH(), "키워드1"), 3),
+            PopularKeyword(PopularKeywordPk(getStringYyMMddHH(), "키워드2"), 2),
+            PopularKeyword(PopularKeywordPk(getStringYyMMddHH(), "키워드3"), 1),
         )
         val response = PopularKeywordResponse.of(list)
 
@@ -24,4 +24,3 @@ class PopularKeywordResponseTest{
         )
     }
 }
-
