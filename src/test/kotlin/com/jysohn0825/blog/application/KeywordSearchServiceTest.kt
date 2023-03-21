@@ -6,15 +6,16 @@ import com.jysohn0825.blog.infra.channel.kakao.KakaoClientTest.Companion.KEYWORD
 import com.jysohn0825.blog.infra.channel.kakao.KakaoSearchByKeywordResponse
 import com.jysohn0825.support.domain.BasePageRequest
 import com.jysohn0825.support.domain.SortEnum
-import io.mockk.every
-import io.mockk.mockk
+import io.mockk.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.Date
+import org.springframework.context.ApplicationEventPublisher
+import java.util.*
 
 class KeywordSearchServiceTest {
     private val channelClient = mockk<ChannelFactory>()
-    private val service = KeywordSearchService(channelClient)
+    private val eventPublisher = mockk<ApplicationEventPublisher>()
+    private val service = KeywordSearchService(channelClient, eventPublisher)
 
     private val list = listOf(
         KakaoSearchByKeywordResponse.Documents("정확도9", Date(2000)), //LocalDateTime.of(2000, 1, 1, 1, 1)),

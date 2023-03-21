@@ -9,8 +9,8 @@ class ChannelFactory(
     private val kakaoClient: KakaoClient
 ) {
 
-    fun searchByKeyword(type: ChannelType, keyword: String, request: BasePageRequest): ChannelSearchByKeywordResponse {
-        return when (type) {
+    fun searchByKeyword(channel: ChannelType, keyword: String, request: BasePageRequest): ChannelSearchByKeywordResponse {
+        return when (channel) {
             ChannelType.KAKAO -> kakaoClient.searchByKeyword(keyword, request)
             ChannelType.NAVER -> kakaoClient.searchByKeyword(keyword, request) // TODO NAVER API 로 변경
         }

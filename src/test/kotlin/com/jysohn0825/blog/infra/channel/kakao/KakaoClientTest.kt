@@ -1,5 +1,7 @@
 package com.jysohn0825.blog.infra.channel.kakao
 
+import com.jysohn0825.blog.infra.channel.kakao.KakaoClient.Companion.PAGE_LIMIT
+import com.jysohn0825.blog.infra.channel.kakao.KakaoClient.Companion.SIZE_LIMIT
 import com.jysohn0825.support.domain.BasePageRequest
 import com.jysohn0825.support.domain.SortEnum
 import io.mockk.every
@@ -15,22 +17,21 @@ import java.util.*
 
 class KakaoClientTest {
 
-    private val properties = KakaoProperties("uri", "path", "key", 50, 50)
     private val restTemplate = mockk<RestTemplate>()
-    private val client = KakaoClient(properties, restTemplate)
+    private val client = KakaoClient(restTemplate)
 
 
     @Test
     fun `페이지 유효성 체크`() {
         assertThrows<IllegalArgumentException> {
-            client.checkPageRequestValid(BasePageRequest(page = properties.pageLimit + 1))
+            client.checkPageRequestValid(BasePageRequest(page = PAGE_LIMIT + 1))
         }
     }
 
     @Test
     fun `사이즈 유효성 체크`() {
         assertThrows<IllegalArgumentException> {
-            client.checkPageRequestValid(BasePageRequest(page = properties.sizeLimit + 1))
+            client.checkPageRequestValid(BasePageRequest(page = SIZE_LIMIT + 1))
         }
     }
 
