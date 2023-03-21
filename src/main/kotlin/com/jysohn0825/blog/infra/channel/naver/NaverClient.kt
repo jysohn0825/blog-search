@@ -1,6 +1,7 @@
 package com.jysohn0825.blog.infra.channel.naver
 
 import com.jysohn0825.blog.infra.channel.ChannelClient
+import com.jysohn0825.blog.infra.channel.kakao.KakaoClient
 import com.jysohn0825.support.domain.BasePageRequest
 import com.jysohn0825.support.domain.SortEnum
 import org.springframework.beans.factory.annotation.Value
@@ -21,8 +22,8 @@ class NaverClient(
     override fun extractKeyword(keyword: String): String = keyword
 
     override fun checkPageRequestValid(request: BasePageRequest) {
-        require(request.page <= PAGE_LIMIT) { "최대 페이지 수를 넘겼습니다." }
-        require(request.size <= SIZE_LIMIT) { "최대 문서 수를 넘겼습니다." }
+        require(request.page in PAGE_MIN_LIMIT..PAGE_MAX_LIMIT) { "올바르지 않은 페이지 (${KakaoClient.PAGE_MIN_LIMIT} ~ ${KakaoClient.PAGE_MAX_LIMIT} 가 아님)." }
+        require(request.size in SIZE_MIN_LIMIT..SIZE_MAX_LIMIT) { "올바르지 않은 사이즈 (${KakaoClient.SIZE_MIN_LIMIT} ~ ${KakaoClient.SIZE_MAX_LIMIT} 가 아님)." }
     }
 
     override fun searchByKeyword(keyword: String, request: BasePageRequest): NaverSearchByKeywordResponse {
@@ -45,7 +46,9 @@ class NaverClient(
     companion object {
         const val URL = "https://openapi.naver.com"
         const val PATH = "/v1/search/blog.json"
-        const val PAGE_LIMIT = 100
-        const val SIZE_LIMIT = 100
+        const val PAGE_MIN_LIMIT = 1
+        const val PAGE_MAX_LIMIT = 100
+        const val SIZE_MIN_LIMIT = 1
+        const val SIZE_MAX_LIMIT = 100
     }
 }

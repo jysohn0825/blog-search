@@ -25,8 +25,8 @@ class KakaoClient(
     }
 
     override fun checkPageRequestValid(request: BasePageRequest) {
-        require(request.page <= PAGE_LIMIT) { "최대 페이지 수를 넘겼습니다." }
-        require(request.size <= SIZE_LIMIT) { "최대 문서 수를 넘겼습니다." }
+        require(request.page in PAGE_MIN_LIMIT..PAGE_MAX_LIMIT) { "올바르지 않은 페이지 ($PAGE_MIN_LIMIT ~ $PAGE_MAX_LIMIT 가 아님)." }
+        require(request.size in SIZE_MIN_LIMIT..SIZE_MAX_LIMIT) { "올바르지 않은 사이즈 ($SIZE_MIN_LIMIT ~ $SIZE_MAX_LIMIT 가 아님)." }
     }
 
     override fun searchByKeyword(keyword: String, request: BasePageRequest): KakaoSearchByKeywordResponse {
@@ -49,7 +49,9 @@ class KakaoClient(
     companion object {
         const val URL = "https://dapi.kakao.com"
         const val PATH = "/v2/search/web"
-        const val PAGE_LIMIT = 50
-        const val SIZE_LIMIT = 50
+        const val PAGE_MIN_LIMIT = 1
+        const val PAGE_MAX_LIMIT = 50
+        const val SIZE_MIN_LIMIT = 1
+        const val SIZE_MAX_LIMIT = 50
     }
 }

@@ -1,7 +1,7 @@
 package com.jysohn0825.blog.infra.channel.naver
 
-import com.jysohn0825.blog.infra.channel.naver.NaverClient.Companion.PAGE_LIMIT
-import com.jysohn0825.blog.infra.channel.naver.NaverClient.Companion.SIZE_LIMIT
+import com.jysohn0825.blog.infra.channel.naver.NaverClient.Companion.PAGE_MAX_LIMIT
+import com.jysohn0825.blog.infra.channel.naver.NaverClient.Companion.SIZE_MAX_LIMIT
 import com.jysohn0825.support.domain.BasePageRequest
 import com.jysohn0825.support.domain.SortEnum
 import io.mockk.every
@@ -24,14 +24,14 @@ class NaverClientTest {
     @Test
     fun `페이지 유효성 체크`() {
         assertThrows<IllegalArgumentException> {
-            client.checkPageRequestValid(BasePageRequest(page = PAGE_LIMIT + 1))
+            client.checkPageRequestValid(BasePageRequest(page = PAGE_MAX_LIMIT + 1))
         }
     }
 
     @Test
     fun `사이즈 유효성 체크`() {
         assertThrows<IllegalArgumentException> {
-            client.checkPageRequestValid(BasePageRequest(page = SIZE_LIMIT + 1))
+            client.checkPageRequestValid(BasePageRequest(page = SIZE_MAX_LIMIT + 1))
         }
     }
 
@@ -62,7 +62,7 @@ class NaverClientTest {
                 restTemplate.exchange(any(), NaverSearchByKeywordResponse::class.java)
             } returns ResponseEntity.of(Optional.of(getResponse(size, sort)))
 
-            val actual = client.searchByKeyword(KEYWORD, BasePageRequest(sort, 0, size))
+            val actual = client.searchByKeyword(KEYWORD, BasePageRequest(sort, 1, size))
 
             assertThat(actual.items[0].title).isEqualTo("정확도순 ${size}위")
         }
@@ -78,7 +78,7 @@ class NaverClientTest {
     }
 
     private fun getMappedRequestAndResponseList(size: Int) = mapOf(
-        SortEnum.ACCURACY to 0,
+        SortEnum.ACCURACY to 1,
         SortEnum.RECENCY to size
     )
 
@@ -87,7 +87,7 @@ class NaverClientTest {
         sortEnum: SortEnum = SortEnum.ACCURACY
     ): NaverSearchByKeywordResponse {
         val items = buildList {
-            for (i in 0..size) {
+            for (i in 1..size) {
                 add(getDocuments(title = "정확도순 ${i}위", year = i))
             }
         }
