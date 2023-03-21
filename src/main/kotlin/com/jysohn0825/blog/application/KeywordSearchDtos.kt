@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 
 data class KeywordSearchResponse(
     val pageResponse: BasePageResponse,
+    val channel: ChannelType,
     val contents: List<ContentSummary>
 )
 
@@ -14,7 +15,6 @@ data class ContentSummary(
     var contents: String,
     val url: String,
     val dateTime: LocalDateTime,
-    val channel: ChannelType,
     val thumbnail: String = ""
 ) {
     init {

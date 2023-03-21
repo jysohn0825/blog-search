@@ -35,7 +35,8 @@ data class KakaoSearchByKeywordResponse(
     override fun changeKeywordSearchResponse(request: BasePageRequest): KeywordSearchResponse =
         KeywordSearchResponse(
             meta.let { BasePageResponse(getPage(it, request), documents.size, it.isEnd) },
-            documents.map { ContentSummary(it.title, it.contents, it.url, it.datetime, ChannelType.KAKAO, it.thumbnail) }
+            ChannelType.KAKAO,
+            documents.map { ContentSummary(it.title, it.contents, it.url, it.datetime, it.thumbnail) }
         )
 
     private fun getPage(meta: Meta, request: BasePageRequest): Int =

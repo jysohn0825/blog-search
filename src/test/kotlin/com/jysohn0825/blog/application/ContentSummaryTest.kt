@@ -1,7 +1,6 @@
 package com.jysohn0825.blog.application
 
 import com.jysohn0825.blog.application.ContentSummary.Companion.CONTENT_LIMIT_LENGTH
-import com.jysohn0825.blog.infra.channel.ChannelType
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
@@ -32,7 +31,6 @@ class ContentSummaryTest {
             """.trimIndent(),
             "url",
             LocalDateTime.now(),
-            ChannelType.KAKAO,
             "thumbnail"
         )
 

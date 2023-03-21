@@ -29,6 +29,7 @@ data class NaverSearchByKeywordResponse(
     override fun changeKeywordSearchResponse(request: BasePageRequest): KeywordSearchResponse =
         KeywordSearchResponse(
             BasePageResponse(start, items.size, (items.size != display)),
-            items.map { ContentSummary(it.title, it.description, it.bloggerlink, it.postdate.convertLocalDateTime(), ChannelType.NAVER) }
+            ChannelType.NAVER,
+            items.map { ContentSummary(it.title, it.description, it.bloggerlink, it.postdate.convertLocalDateTime()) }
         )
 }
