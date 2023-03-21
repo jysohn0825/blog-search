@@ -2,7 +2,7 @@
 
 
 ### 기능 요구 사항
-- [ ] 블로그 검색
+- [X] 블로그 검색
     - [X] Open API 연결
     - [X] 키워드를 통한 검색
     - [X] 검색 결과 정렬
@@ -33,4 +33,4 @@
 
 
 ### API 문서
-- 서버 실핼 후 : localhost:8080/swagger-ui.html
+- 서버 실행 후 : localhost:8080/swagger-ui.html
