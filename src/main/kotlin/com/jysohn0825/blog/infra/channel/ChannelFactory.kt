@@ -15,4 +15,11 @@ class ChannelFactory(
             ChannelType.NAVER -> kakaoClient.searchByKeyword(keyword, request) // TODO NAVER API 로 변경
         }
     }
+
+    fun extractKeyword(channel: ChannelType, keyword: String): String{
+        return when (channel) {
+            ChannelType.KAKAO -> kakaoClient.findKeyword(keyword)
+            ChannelType.NAVER -> kakaoClient.findKeyword(keyword) // TODO NAVER API 로 변경
+        }
+    }
 }

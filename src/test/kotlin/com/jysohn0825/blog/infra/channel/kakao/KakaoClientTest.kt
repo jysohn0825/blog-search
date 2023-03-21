@@ -68,6 +68,31 @@ class KakaoClientTest {
         }
     }
 
+    @Test
+    fun `키워드에 공백이 있을 경우 2번째가 키워드임을 확인`() {
+        val keyword = "http://kakao.com 카카오"
+
+        val actual = client.findKeyword(keyword)
+
+        assertThat(actual).isEqualTo("카카오")
+    }
+
+    @Test
+    fun `키워드에 공백이 없을 경우 키워드 확인`() {
+        val keyword = "http://kakao.com카카오"
+
+        val actual = client.findKeyword(keyword)
+
+        assertThat(actual).isEqualTo("http://kakao.com카카오")
+    }
+
+    @Test
+    fun `키워드에 공백이 2개 이상일 경우 에러 확인`() {
+        val keyword = "http://kakao.com 카카오 톡"
+
+        assertThrows<IllegalArgumentException> { client.findKeyword(keyword) }
+    }
+
     private fun getMappedRequestAndResponseList(size: Int) = mapOf(
         SortEnum.ACCURACY to 0,
         SortEnum.RECENCY to size

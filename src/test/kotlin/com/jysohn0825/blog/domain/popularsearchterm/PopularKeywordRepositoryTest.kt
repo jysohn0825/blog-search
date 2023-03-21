@@ -18,7 +18,8 @@ import javax.transaction.Transactional
 @DataJpaTest
 class PopularKeywordRepositoryTest @Autowired constructor(
     private val repository: PopularKeywordRepository,
-    private val entityManager: TestEntityManager,
+    private val testEntityManager: TestEntityManager,
+    private val entityManager: EntityManager
 ) {
 
     val service = PopularKeywordService(repository)
@@ -39,7 +40,7 @@ class PopularKeywordRepositoryTest @Autowired constructor(
         val baseHour = "23122509"
         val keyword = "크리스마스"
         val pk = getPopularKeywordPk(baseHour, keyword)
-        entityManager.persistAndFlush(getPopularKeyword(pk))
+        testEntityManager.persistAndFlush(getPopularKeyword(pk))
 
         val actual = repository.findByPkOrNew(pk)
 
@@ -52,7 +53,7 @@ class PopularKeywordRepositoryTest @Autowired constructor(
         val min = 1L
         val max = 11L
         for (count in min..max) {
-            entityManager.persistAndFlush(
+            testEntityManager.persistAndFlush(
                 getPopularKeyword(getPopularKeywordPk(baseHour, count.toString()), count)
             )
         }
@@ -76,7 +77,12 @@ class PopularKeywordRepositoryTest @Autowired constructor(
         )
         data.forEach {
             for (count in it.value) {
-                entityManager.persistAndFlush(getPopularKeyword(getPopularKeywordPk(it.key, KEYWORD + count), count))
+                testEntityManager.persistAndFlush(
+                    getPopularKeyword(
+                        getPopularKeywordPk(it.key, KEYWORD + count),
+                        count
+                    )
+                )
             }
         }
 
@@ -85,26 +91,28 @@ class PopularKeywordRepositoryTest @Autowired constructor(
         assertThat(actual.size).isEqualTo(data[baseHour1]!!.last - data[baseHour1]!!.first + 1L)
     }
 
-//    @Test
-//    fun `Lock 테스트`() {
-//        val pk = getPopularKeywordPk()
-//        entityManager.persistAndFlush(getPopularKeyword(pk))
-//
-//        val count = 100
-//        val executor = Executors.newFixedThreadPool(10)
-//        val latch = CountDownLatch(count)
-//
-//        for (i in 0 until count) {
-//            executor.execute {
-//                service.findAndSave(pk)
-//                latch.countDown()
-//            }
-//        }
-//        latch.await()
-//
-//        val actual = entityManager.find(PopularKeyword::class.java, pk)
-//
-//        assertThat(actual.count).isEqualTo(count + 1)
-//    }
+    @Transactional
+    @Test
+    fun `Lock 테스트`() {
+        val pk = getPopularKeywordPk()
+
+        entityManager.persist(getPopularKeyword(pk))
+
+        val count = 100
+        val executor = Executors.newFixedThreadPool(10)
+        val latch = CountDownLatch(count)
+
+        for (i in 0 until count) {
+            executor.execute {
+                service.findAndSave(pk)
+                latch.countDown()
+            }
+        }
+        latch.await()
+
+        val actual = entityManager.find(PopularKeyword::class.java, pk)
+
+        assertThat(actual.count).isEqualTo(count + 1)
+    }
 }
 

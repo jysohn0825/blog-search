@@ -15,6 +15,15 @@ class KakaoClient(
     @Value("\${search.kakao.key}")
     private val key = ""
 
+    override fun findKeyword(keyword: String): String {
+        val checkBlank = keyword.split(" ")
+        return when (checkBlank.size) {
+            2 -> checkBlank[1]
+            1 -> checkBlank[0]
+            else -> throw IllegalArgumentException("잘못된 검색어 입니다.")
+        }
+    }
+
     override fun checkPageRequestValid(request: BasePageRequest) {
         require(request.page <= PAGE_LIMIT) { "최대 페이지 수를 넘겼습니다." }
         require(request.size <= SIZE_LIMIT) { "최대 문서 수를 넘겼습니다." }
