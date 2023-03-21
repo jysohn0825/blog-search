@@ -6,7 +6,7 @@ import com.jysohn0825.blog.infra.channel.kakao.KakaoSearchByKeywordResponse
 import com.jysohn0825.blog.infra.channel.naver.NaverClient
 import com.jysohn0825.blog.infra.channel.naver.NaverClientTest
 import com.jysohn0825.blog.infra.channel.naver.NaverSearchByKeywordResponse
-import com.jysohn0825.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.BasePageRequest
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

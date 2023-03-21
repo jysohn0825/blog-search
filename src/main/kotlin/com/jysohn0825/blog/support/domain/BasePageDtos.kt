@@ -1,4 +1,4 @@
-package com.jysohn0825.support.domain
+package com.jysohn0825.blog.support.domain
 
 enum class SortEnum {
     ACCURACY, RECENCY

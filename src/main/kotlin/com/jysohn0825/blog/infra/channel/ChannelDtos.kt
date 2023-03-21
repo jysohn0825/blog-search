@@ -1,7 +1,7 @@
 package com.jysohn0825.blog.infra.channel
 
 import com.jysohn0825.blog.application.KeywordSearchResponse
-import com.jysohn0825.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.BasePageRequest
 
 enum class ChannelType {
     KAKAO, NAVER

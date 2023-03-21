@@ -6,8 +6,8 @@ import com.jysohn0825.blog.application.ContentSummary
 import com.jysohn0825.blog.application.KeywordSearchResponse
 import com.jysohn0825.blog.infra.channel.ChannelSearchByKeywordResponse
 import com.jysohn0825.blog.infra.channel.ChannelType
-import com.jysohn0825.support.domain.BasePageRequest
-import com.jysohn0825.support.domain.BasePageResponse
+import com.jysohn0825.blog.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.BasePageResponse
 import java.time.LocalDateTime
 import java.util.*
 

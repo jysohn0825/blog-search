@@ -2,7 +2,7 @@ package com.jysohn0825.blog.application
 
 import com.jysohn0825.blog.domain.popularsearchterm.PopularKeyword
 import com.jysohn0825.blog.domain.popularsearchterm.PopularKeywordPk
-import com.jysohn0825.support.utils.getStringYyMMddHH
+import com.jysohn0825.blog.support.utils.getStringYyMMddHH
 
 data class PopularKeywordResponse(
     val popularKeywords: List<PopularKeywordRank>

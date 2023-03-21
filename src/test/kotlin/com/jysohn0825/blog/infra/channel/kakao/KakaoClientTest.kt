@@ -2,8 +2,8 @@ package com.jysohn0825.blog.infra.channel.kakao
 
 import com.jysohn0825.blog.infra.channel.kakao.KakaoClient.Companion.PAGE_MAX_LIMIT
 import com.jysohn0825.blog.infra.channel.kakao.KakaoClient.Companion.SIZE_MAX_LIMIT
-import com.jysohn0825.support.domain.BasePageRequest
-import com.jysohn0825.support.domain.SortEnum
+import com.jysohn0825.blog.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.SortEnum
 import io.mockk.every
 import io.mockk.mockk
 import org.assertj.core.api.Assertions.assertThat

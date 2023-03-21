@@ -1,7 +1,7 @@
 package com.jysohn0825.blog.infra.channel.kakao
 
 import com.jysohn0825.blog.infra.channel.ChannelClient
-import com.jysohn0825.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.BasePageRequest
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Component

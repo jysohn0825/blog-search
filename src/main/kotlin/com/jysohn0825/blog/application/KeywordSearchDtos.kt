@@ -1,7 +1,7 @@
 package com.jysohn0825.blog.application
 
 import com.jysohn0825.blog.infra.channel.ChannelType
-import com.jysohn0825.support.domain.BasePageResponse
+import com.jysohn0825.blog.support.domain.BasePageResponse
 import java.time.LocalDateTime
 
 data class KeywordSearchResponse(

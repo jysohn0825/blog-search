@@ -2,7 +2,7 @@ package com.jysohn0825.blog.infra.channel
 
 import com.jysohn0825.blog.infra.channel.kakao.KakaoClient
 import com.jysohn0825.blog.infra.channel.naver.NaverClient
-import com.jysohn0825.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.BasePageRequest
 import org.springframework.stereotype.Component
 
 @Component

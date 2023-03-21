@@ -4,8 +4,8 @@ import com.jysohn0825.blog.infra.channel.ChannelFactory
 import com.jysohn0825.blog.infra.channel.ChannelType
 import com.jysohn0825.blog.infra.channel.kakao.KakaoClientTest.Companion.KEYWORD
 import com.jysohn0825.blog.infra.channel.kakao.KakaoSearchByKeywordResponse
-import com.jysohn0825.support.domain.BasePageRequest
-import com.jysohn0825.support.domain.SortEnum
+import com.jysohn0825.blog.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.SortEnum
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just

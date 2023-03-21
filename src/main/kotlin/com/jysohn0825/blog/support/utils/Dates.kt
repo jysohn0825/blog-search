@@ -1,4 +1,4 @@
-package com.jysohn0825.support.utils
+package com.jysohn0825.blog.support.utils
 
 import java.time.LocalDate
 import java.time.LocalDateTime

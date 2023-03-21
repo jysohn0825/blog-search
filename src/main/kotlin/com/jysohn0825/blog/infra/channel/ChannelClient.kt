@@ -1,6 +1,6 @@
 package com.jysohn0825.blog.infra.channel
 
-import com.jysohn0825.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.BasePageRequest
 import org.springframework.http.HttpMethod
 import org.springframework.http.MediaType
 import org.springframework.http.RequestEntity

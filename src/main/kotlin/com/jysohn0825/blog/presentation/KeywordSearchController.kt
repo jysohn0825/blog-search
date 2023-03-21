@@ -2,7 +2,7 @@ package com.jysohn0825.blog.presentation
 
 import com.jysohn0825.blog.application.KeywordSearchService
 import com.jysohn0825.blog.infra.channel.ChannelType
-import com.jysohn0825.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.BasePageRequest
 import org.springframework.web.bind.annotation.*
 
 @RestController

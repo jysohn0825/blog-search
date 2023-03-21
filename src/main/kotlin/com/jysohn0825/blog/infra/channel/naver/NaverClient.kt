@@ -2,8 +2,8 @@ package com.jysohn0825.blog.infra.channel.naver
 
 import com.jysohn0825.blog.infra.channel.ChannelClient
 import com.jysohn0825.blog.infra.channel.kakao.KakaoClient
-import com.jysohn0825.support.domain.BasePageRequest
-import com.jysohn0825.support.domain.SortEnum
+import com.jysohn0825.blog.support.domain.BasePageRequest
+import com.jysohn0825.blog.support.domain.SortEnum
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate

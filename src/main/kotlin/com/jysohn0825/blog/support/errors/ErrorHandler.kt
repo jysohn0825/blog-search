@@ -1,4 +1,4 @@
-package com.jysohn0825.blog.errors
+package com.jysohn0825.blog.support.errors
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
