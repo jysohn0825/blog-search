@@ -4,9 +4,7 @@ import com.jysohn0825.blog.domain.popularsearchterm.PopularKeywordPk
 import com.jysohn0825.blog.domain.popularsearchterm.PopularKeywordRepository
 import com.jysohn0825.blog.domain.popularsearchterm.findByPkOrNew
 import com.jysohn0825.support.utils.getStringYyMMddHH
-import org.springframework.context.event.EventListener
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
 import javax.persistence.EntityExistsException
 import javax.transaction.Transactional
@@ -20,12 +18,6 @@ class PopularKeywordService(
     fun findTop10PopularKeyword(baseHour: String?): PopularKeywordResponse {
         val list = popularKeywordRepository.findTop10ByPkBaseHourOrderByCountDesc(baseHour ?: getStringYyMMddHH())
         return PopularKeywordResponse.of(list)
-    }
-
-    @Async
-    @EventListener
-    fun addKeywordCount(event: PopularKeywordEvent) {
-        findAndSave(event.pk)
     }
 
     fun findAndSave(pk: PopularKeywordPk, isRepeat: Boolean = false) {

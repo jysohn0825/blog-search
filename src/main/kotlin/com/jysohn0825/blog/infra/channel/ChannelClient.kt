@@ -12,7 +12,7 @@ import java.net.URI
 
 interface ChannelClient<T : ChannelSearchByKeywordResponse> {
 
-    fun findKeyword(keyword: String): String
+    fun extractKeyword(keyword: String): String
 
     fun checkPageRequestValid(request: BasePageRequest)
     fun searchByKeyword(keyword: String, request: BasePageRequest): ChannelSearchByKeywordResponse

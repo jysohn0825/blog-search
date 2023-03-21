@@ -15,7 +15,7 @@ class KakaoClient(
     @Value("\${search.kakao.key}")
     private val key = ""
 
-    override fun findKeyword(keyword: String): String {
+    override fun extractKeyword(keyword: String): String {
         val checkBlank = keyword.split(" ")
         return when (checkBlank.size) {
             2 -> checkBlank[1]

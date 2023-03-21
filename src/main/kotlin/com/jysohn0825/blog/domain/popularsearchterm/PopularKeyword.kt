@@ -2,6 +2,7 @@ package com.jysohn0825.blog.domain.popularsearchterm
 
 import org.springframework.data.domain.Persistable
 import javax.persistence.*
+import kotlin.jvm.Transient
 
 @Table(indexes = [Index(name = "idx_popular_search_term", columnList = "baseHour")])
 @Entity
